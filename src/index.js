@@ -64,7 +64,11 @@ class Map extends React.Component {
   }
   render() {
     return (
-       <div id='mapDiv'></div>
+      <div id="mapHolder">
+        <div id="mapFrame">
+          <div id='mapDiv'></div>
+        </div>
+      </div>
     )
   }
 }
@@ -116,21 +120,23 @@ class StringInput extends React.Component {
   render() {
     return (
       <div>
-        <h2>Find a location!</h2>
+        <h2>Find a location</h2>
         <p>Enter a 2-12 character string using the Geohash alphabet:</p>
+        <p class="instructions">
+          The Geohash alphabet [32ghs] uses all
+          digits 0-9 and almost all <b>lower case</b> letters except a, i, l and o.
+        </p>
         <input
           type="text"
+          size="12"
           onChange={this.updateString}
+          fontSize="50"
         />
         <input
           type="button"
           value="Submit"
           onClick={this.getGeohash}
         />
-        <p id="instructions">
-          (the Geohash alphabet [32ghs] uses all
-          digits 0-9 and almost all <b>lower case</b> letters except a, i, l and o)
-        </p>
         {this.renderMap()}
       </div>
     );
@@ -172,7 +178,9 @@ class UserLocation extends React.Component {
   renderMap() {
     if (this.state.userLocation === null) {
       return (
-        <p>Finding location...</p>
+        <div id="loadingState">
+          <p class="loadingText">Finding location...</p>
+        </div>
       )
     } else {
         return (
@@ -192,20 +200,25 @@ class UserLocation extends React.Component {
   render() {
     return (
       <div>
-        <h2>Get your location!</h2>
-        <p>Select the accuracy (i.e. string length) and click "submit" to geohash your current location</p>
-        <input
-          type="range"
-          min="2" max="12" step="1"
-          defaultValue="6"
-          onInput={this.setCharacterLength}
-        />
+        <h2>Get your location</h2>
+        <p>Select the accuracy (i.e. string length) and click "submit" to Geohash your current location</p>
+        <div id="stringLength">
+          <label class="stringLength">
+            <input
+              type="range"
+              class="slider"
+              min="2" max="12" step="1"
+              defaultValue="6"
+              onInput={this.setCharacterLength}
+            />
+            String length: {this.state.stringLength} characters
+          </label>
+        </div>
         <input
           type="button"
           value="Submit"
           onClick={this.getString}
         />
-        <p>String length: {this.state.stringLength} characters</p>
         {this.renderMap()}
       </div>
     );
@@ -233,16 +246,23 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div id="mainBody">
-        <h1>Geohash!</h1>
-        <div id="appOptions" onChange={this.changeFunction}>
-          <input type="radio" value="userInput" name="selectFunction"/>Enter a custom Geohash string
-          <input type="radio" value="userLocation" name="selectFunction"/>Get your current location
+      <div id="wrapper">
+        <div id="appIntro">
+          <h1>GEOHASH</h1>
+          <div id="appOptions" onChange={this.changeFunction}>
+            <label>
+              Enter a custom Geohash string<br />
+              <input type="radio" value="userInput" name="selectFunction"/>
+            </label>
+            <label>
+              Find your current location<br />
+              <input type="radio" value="userLocation" name="selectFunction"/>
+            </label>
+          </div>
         </div>
         <div id="userInterface">
           {this.switchAppFunction()}
         </div>
-         
       </div>
     );
   }

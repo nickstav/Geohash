@@ -13,9 +13,13 @@ async function getUserLocation() {
 ;}
 
 function getCoords() {
-    return new Promise((res, rej) => {
-        navigator.geolocation.getCurrentPosition(res, rej);
-    });
+    try {
+        return new Promise((res, rej) => {
+            navigator.geolocation.getCurrentPosition(res, rej);
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function getLocationAccuracy(stringLength, coord) {
