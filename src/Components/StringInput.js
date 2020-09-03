@@ -47,26 +47,30 @@ class StringInput extends React.Component {
     }
     render() {
       return (
-        <div>
+        <React.Fragment>
           <h2>Find a location</h2>
           <p>Enter a 2-12 character string using the Geohash alphabet:</p>
           <p className="instructions">
             The Geohash alphabet [32ghs] uses all
             digits 0-9 and almost all <b>lower case</b> letters except a, i, l and o.
           </p>
-          <input
-            type="text"
-            size="12"
-            onChange={this.updateString}
-            fontSize="50"
-          />
-          <input
-            type="button"
-            value="Submit"
-            onClick={this.getGeohash}
-          />
+          <div id="textInputWrapper">
+            <input
+              type="text"
+              size="12"
+              onChange={this.updateString}
+              fontSize="50"
+            />
+          </div>
+          <div id="buttonWrapper">
+            <input
+              type="button"
+              value="Submit"
+              onClick={this.getGeohash}
+            />
+          </div>
           {this.renderMap()}
-        </div>
+          </React.Fragment>
       );
     }
   }

@@ -58,7 +58,7 @@ class UserLocation extends React.Component {
     }
     render() {
       return (
-        <div>
+        <React.Fragment>
           <h2>Get your location</h2>
           <p>Select the accuracy (i.e. string length) and click "submit" to Geohash your current location</p>
           <div id="stringLength">
@@ -73,13 +73,15 @@ class UserLocation extends React.Component {
               String length: {this.state.stringLength} characters
             </label>
           </div>
-          <input
-            type="button"
-            value="Submit"
-            onClick={this.getString}
-          />
+          <div id="buttonWrapper">
+            <input
+              type="button"
+              value="Submit"
+              onClick={this.getString}
+            />
+          </div>
           {this.renderMap()}
-        </div>
+          </React.Fragment>
       );
     }
   }

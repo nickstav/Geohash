@@ -64,12 +64,11 @@ input[type="radio"]:checked {
 }
 /*---------------------------------------UI------------------------------------------------- */
 #userInterface {
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
-	justify-content: space-around;
-	padding-left: 4px;
-	padding-right: 4px;
+	justify-content: flex-start;
 }
 p.instructions {
 	font-size:12px;
@@ -84,6 +83,9 @@ label {
 }
 label.stringLength {
 	font-size: 10px;
+}
+#textInputWrapper {
+	padding: 4px;
 }
 input[type="text"] {
 	font-size: 24px;
@@ -159,9 +161,8 @@ p.loadingText {
 /*--------------------------------------Map------------------------------------------------- */
 #mapHolder {
 	height: 100%;
-	padding-left: 4px;
-	padding-right: 4px;
 	padding-top: 30px;
+	margin: 0;
 }
 #mapFrame {
 	height: 100%;
