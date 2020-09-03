@@ -1,4 +1,4 @@
-let L = window.L;
+const L = window.L;
 
 function loadMap(lat, long) {
     let newMap = L.map('mapDiv').setView([lat,long], 1);
@@ -17,4 +17,4 @@ function createMarker(map, lat, long) {
     return newMarker;
 }
 
-export { loadMap, createMarker }
+export { loadMap, createMarker };

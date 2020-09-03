@@ -1,4 +1,3 @@
-
 function getLocation(string) {
     let binaryCoords = getLatLongAsBinary(string)
 
@@ -21,7 +20,6 @@ function getLocation(string) {
             averageLongitude: longitude.average
             };
 }
-
 
 // function to turn string of chracters into their binary representations and join them together
 function getLatLongAsBinary(string) {
@@ -66,7 +64,7 @@ function splitBinaryIntoLatLong(string) {
         };
     }
 
-    return {latitude, longitude}
+    return {latitude, longitude};
 }
 
 
