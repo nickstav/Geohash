@@ -6,11 +6,18 @@ class StringInput extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        string: '',
+        string: this.props.string,
         coords: null,
         showMap: false
       };
     }
+    componentDidMount() {
+      //show result of any URL Query that has been detected
+      if (this.state.string.length > 1) {
+        this.getGeohash();
+      }
+    }
+
     updateString = (event) => {
       this.setState({string: event.target.value});
     }
@@ -56,6 +63,7 @@ class StringInput extends React.Component {
           </p>
           <div id="textInputWrapper">
             <input
+            value={this.state.string}
               type="text"
               size="12"
               onChange={this.updateString}

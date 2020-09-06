@@ -27,6 +27,7 @@ function getLatLongAsBinary(string) {
     for (const character of string) {
         let binaryValue = getBinaryRepresentation(character);
         if (binaryValue === null) {
+            console.error(`Invalid character: ${character}`);
             return null;
         } else {
             binaryString = binaryString + binaryValue;

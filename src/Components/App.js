@@ -3,15 +3,31 @@ import { Splash } from './Splash.js'
 import { TopBar } from './TopBar.js';
 import { StringInput } from './StringInput.js';
 import { UserLocation } from './UserLocation.js';
+import { getURLQueryGeohash } from '../Algorithms/urlQuery.js';
+import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
 class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
+        urlQuery: getURLQueryGeohash(),
         function: "",
         menuOpen: false,
         appStarted: false
       };
+    }
+    checkForURLQuery() {
+      if (this.state.urlQuery.length < 1) {
+        return;
+      } else {
+        this.setState({
+          function: "userInput",
+          appStarted: true
+        });
+      }
+    }
+    componentDidMount() {
+      this.checkForURLQuery();
     }
     changeFunction = (event) => {
       this.setState({
@@ -22,7 +38,7 @@ class App extends React.Component {
     }
     switchAppFunction() {
       if (this.state.function === "userInput") {
-        return <StringInput/>
+        return <StringInput string={this.state.urlQuery}/>
       } else if (this.state.function === "userLocation") {
         return <UserLocation/>
       };
