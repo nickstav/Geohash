@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map } from './Map.js';
 import { getLocation } from '../Algorithms/stringAlgorithm.js';
+import { updateURLQuery } from '../Algorithms/urlQuery.js';
 
 class StringInput extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class StringInput extends React.Component {
     }
     componentDidMount() {
       //show result of any URL Query that has been detected
-      if (this.state.string.length > 1) {
+      if (this.props.string) {
         this.getGeohash();
       }
     }
@@ -34,6 +35,7 @@ class StringInput extends React.Component {
           showMap: true,
           coords: geohash
         });
+        updateURLQuery(this.state.string);
       } 
     }
     renderMap() {
@@ -55,27 +57,29 @@ class StringInput extends React.Component {
     render() {
       return (
         <React.Fragment>
-          <h2>Find a location</h2>
-          <p>Enter a 2-12 character string using the Geohash alphabet:</p>
-          <p className="instructions">
-            The Geohash alphabet [32ghs] uses all
-            digits 0-9 and almost all <b>lower case</b> letters except a, i, l and o.
-          </p>
-          <div id="textInputWrapper">
-            <input
-            value={this.state.string}
-              type="text"
-              size="12"
-              onChange={this.updateString}
-              fontSize="50"
-            />
-          </div>
-          <div id="buttonWrapper">
-            <input
-              type="button"
-              value="Submit"
-              onClick={this.getGeohash}
-            />
+          <div id="options">
+            <h2>Find a location</h2>
+            <p>Enter a 2-12 character string using the Geohash alphabet:</p>
+            <p className="instructions">
+              The Geohash alphabet [32ghs] uses all
+              digits 0-9 and almost all <b>lower case</b> letters except a, i, l and o.
+            </p>
+            <div id="textInputWrapper">
+              <input
+                value={this.state.string}
+                type="text"
+                size="12"
+                onChange={this.updateString}
+                fontSize="50"
+              />
+            </div>
+            <div id="buttonWrapper">
+              <input
+                type="button"
+                value="Submit"
+                onClick={this.getGeohash}
+              />
+            </div>
           </div>
           {this.renderMap()}
           </React.Fragment>

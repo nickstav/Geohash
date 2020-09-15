@@ -4,12 +4,13 @@ import { TopBar } from './TopBar.js';
 import { StringInput } from './StringInput.js';
 import { UserLocation } from './UserLocation.js';
 import { getURLQueryGeohash } from '../Algorithms/urlQuery.js';
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
+import { checkIfDesktop } from '../Algorithms/checkDevice.js';
 
 class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
+        isDesktop: checkIfDesktop(),
         urlQuery: getURLQueryGeohash(),
         function: "",
         menuOpen: false,
@@ -17,7 +18,7 @@ class App extends React.Component {
       };
     }
     checkForURLQuery() {
-      if (this.state.urlQuery.length < 1) {
+      if (this.state.urlQuery === undefined) {
         return;
       } else {
         this.setState({
@@ -49,7 +50,7 @@ class App extends React.Component {
         });
     }
     renderMenu() {
-        if (this.state.menuOpen) {
+        if (this.state.menuOpen || this.state.isDesktop) {
             return (
                 <div id="appOptions" onChange={this.changeFunction}>
                   <label>
