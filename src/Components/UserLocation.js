@@ -35,7 +35,7 @@ class UserLocation extends React.Component {
       }
     }
     renderMap() {
-      if (this.state.userLocation === null) {
+      if (this.state.userLocation === null || this.state.string === null) {
         return (
           <div id="loadingState">
             <p className="loadingText">Finding location...</p>

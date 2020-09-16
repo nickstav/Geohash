@@ -37,6 +37,14 @@ h1 {
 	font-size: 25px;
 	letter-spacing: 5px;
 }
+@media (max-height: 400px) {
+	body {
+		font-size: 12px;
+	}
+	h1 {
+		font-size: 18px;
+	}
+}
   button.menu {
 	background-image: url("./menuIcon.jpg");
 	background-size: 100%;

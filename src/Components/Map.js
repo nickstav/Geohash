@@ -64,7 +64,7 @@ class Map extends React.Component {
       } else if (label !== null) {
         return `Geohash string for current location: <b>${label}</b>`;
       } else if (label === null) {
-        return 'Getting string...';
+        return 'Getting string... (try pressing submit again)';
       } else {
         return 'Error getting label';
       }
