@@ -12,19 +12,23 @@ class UserLocation extends React.Component {
         userLocation: null,
         latAccuracy: 0,
         longAccuracy: 0,
-        requestSubmitted: false
+        requestSubmitted: false,
+        buttonDisabled: true
       };
     }
     async componentDidMount() {
       let coords = await getUserLocation();
-      this.setState({userLocation: coords});
+      this.setState({
+        userLocation: coords,
+        buttonDisabled: false
+      });
     }
     setCharacterLength = (event) => {
       this.setState({stringLength: event.target.value});
     }
     getString = () => {
       if (this.state.UserLocation === null) {
-        alert("User location not found - please wait a few seconds and try again (if the problem persists, check that your location can be shared");
+        alert("User location not found - please wait a few seconds and try again");
       } else {
         this.setState({
           string: getStringForGivenLatLong(this.state.userLocation, this.state.stringLength),
@@ -35,12 +39,12 @@ class UserLocation extends React.Component {
       }
     }
     renderMap() {
-      if (this.state.userLocation === null || this.state.string === null) {
+      if (this.state.userLocation === null) {
         return (
           <div id="loadingState">
             <p className="loadingText">Finding location...</p>
           </div>
-        )
+        ) 
       } else {
           return (
             <Map 
@@ -79,6 +83,7 @@ class UserLocation extends React.Component {
                 type="button"
                 value="Submit"
                 onClick={this.getString}
+                disabled={this.state.buttonDisabled}
               />
             </div>
           </div>

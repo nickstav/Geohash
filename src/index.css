@@ -120,6 +120,9 @@ input[type="button"] {
 	height: 32px;
 	font-size: 18px;
 }
+input[type="button"]:disabled {
+	opacity: 0.2;
+}
 .slider {
 	-webkit-appearance: none;
 	appearance: none;
