@@ -18,7 +18,7 @@ class App extends React.Component {
       };
     }
     checkForURLQuery() {
-      if (this.state.urlQuery === undefined) {
+      if (this.state.urlQuery === '') {
         return;
       } else {
         this.setState({
@@ -29,6 +29,10 @@ class App extends React.Component {
     }
     componentDidMount() {
       this.checkForURLQuery();
+      window.addEventListener('resize', this.updateDimensions);
+    }
+    updateDimensions = () => {
+      this.setState({isDesktop: checkIfDesktop()});
     }
     changeFunction = (event) => {
       this.setState({
@@ -44,7 +48,7 @@ class App extends React.Component {
         return <UserLocation/>
       };
     }
-    toggleMenu = (event) => {
+    toggleMenu = () => {
         this.setState({
             menuOpen: !this.state.menuOpen
         });
@@ -75,7 +79,7 @@ class App extends React.Component {
     render() {
       return (
         <div id="wrapper">
-            <TopBar toggleMenu={this.toggleMenu}/>
+            <TopBar isDesktop={this.state.isDesktop} toggleMenu={this.toggleMenu}/>
             {this.renderMenu()}
             {this.renderSplash()}
             <div id="userInterface">

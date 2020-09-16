@@ -11,7 +11,7 @@ function getStringFromParams(params) {
         if (params.toString().length > 1) {
             alert('Error: URL parameter could not be found. Please ensure url path is of the form "?string=..."')
         };
-        return undefined;
+        return '';
     }
 }
 

@@ -14,23 +14,20 @@ class StringInput extends React.Component {
     }
     componentDidMount() {
       //show result of any URL Query that has been detected
-      if (this.props.string) {
+      if (this.props.string.length > 0) {
         this.getGeohash();
       }
     }
-
     updateString = (event) => {
       this.setState({string: event.target.value});
     }
     getGeohash = () => {
-      if (this.state.string.length < 2 || this.state.string.length > 12) {
+      if ((this.state.string.length > 0 && this.state.string.length < 2) || this.state.string.length > 12) {
         alert('Error: Please enter a string of length 2-12 characters');
         return;
       }
       let geohash = getLocation(this.state.string);
-      if (geohash === null) {
-        alert('Error: One or more characters are not valid for Geohashing')
-      } else {
+      if (geohash !== null) {
         this.setState({
           showMap: true,
           coords: geohash
